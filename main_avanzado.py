@@ -45,6 +45,95 @@ asientos = [
     [],
 ]
 
+
+precioAsientoNormal = 78900
+precioAsientoVIP = 240000
+totalPasaje = 0
+
+def comprar_pasajes():
+    # Solicitar el número de asiento y datos del pasajero
+    print("Precio asientos:")
+    print("Asiento normal: $", precioAsientoNormal)
+    print("Asiento VIP: $", precioAsientoVIP)
+    nroAsiento = int(input("Ingrese numero asiento: "))
+
+    if nroAsiento > 0 and nroAsiento <= 30:
+        print("Seleccionaste asiento normal.")
+        totalPasaje = precioAsientoNormal
+    elif nroAsiento > 30 and nroAsiento <=42:
+        print("Seleccionaste asiento normal.")
+        totalPasaje = precioAsientoNormal
+        
+    nombrePasajero = input("Ingrese nombre pasajero: ")
+    rutPasajero = input("Ingrese rut pasajero (sin guiones ni puntos)): ")
+    telefonoPasajero = input("Ingrese telefono pasajero: ")
+    bancoPasajero = input("Ingrese banco pasajero: ")
+
+    # Crear una lista con los datos del nuevo pasajero
+    nuevoPasajero = [nombrePasajero, rutPasajero, telefonoPasajero, bancoPasajero]
+
+    # Asignar los datos del pasajero al asiento correspondiente 
+    asientos[nroAsiento - 1] = nuevoPasajero
+
+    if bancoPasajero == "bancoDuoc":
+        descuento = totalPasaje*0.15
+    else:
+        descuento = 0
+
+    totalAPagar = totalPasaje - descuento
+
+    print("El total a pagar es de $", totalAPagar)
+    
+
+def anular_pasaje():
+    # Solicitar el número del asiento a anular
+    nroAsientoAAnular = int(input("Ingrese numero del asiento del pasaje a anular: "))
+
+    # Anular el asiento (vaciar la lista para indicar que está disponible)
+    asientos[nroAsientoAAnular - 1] = []
+
+def modificar_datos_pasajero():
+    # Solicitar el número de asiento y el RUT del pasajero
+    nroAsiento = int(input("Ingrese numero asiento: "))
+    rutPasajero = input("Ingrese rut pasajero (sin guiones ni puntos)): ")
+
+    # Verificar que el RUT del pasajero coincida con el registrado en el asiento
+    if asientos[nroAsiento - 1][1] == rutPasajero:
+        print("RUT valido")
+
+        while True:
+            # Mostrar el menú de modificación de datos del pasajero
+            print("****Modificar datos pasajero****")
+            print("1. Modificar nombre pasajero")
+            print("2. Modificar telefono pasajero")
+            print("3. Salir")
+
+            # Obtener la opción del usuario para modificar datos
+            opcionMenuPasajero = int(input("Seleccione una opción: "))
+
+            # Modificar el nombre del pasajero
+            if opcionMenuPasajero == 1:
+                nuevoNombrePasajero = input("Ingrese el nuevo nombre del pasajero: ")
+                # Acceder a la lista del asiento y cambiar el nombre (índice 0 de la lista del asiento)
+                asientos[nroAsiento - 1][0] = nuevoNombrePasajero
+
+            # Modificar el teléfono del pasajero
+            elif opcionMenuPasajero == 2:
+                nuevoTelefonoPasajero = input("Ingrese el nuevo telefono del pasajero: ")
+                # Acceder a la lista del asiento y cambiar el teléfono (índice 2 de la lista del asiento)
+                asientos[nroAsiento - 1][2] = nuevoTelefonoPasajero
+
+            # Salir del menú de modificación de datos del pasajero
+            elif opcionMenuPasajero == 3:
+                print("Saliendo...")
+                break
+            else:
+                # Opción no válida
+                print("Seleccione una opcion valida.")
+    else:
+        print("Rut no encontrado.")
+
+
 # Bucle infinito para mostrar el menú de opciones hasta que el usuario decida salir.
 while True:
     # Mostrar el menú principal con las opciones disponibles.
@@ -84,73 +173,18 @@ while True:
     # Opción 2: Comprar asiento
     elif opcionMenu == 2:
         print("Comprar asiento")
-
-        # Solicitar el número de asiento y datos del pasajero
-        nroAsiento = int(input("Ingrese numero asiento: "))
-        nombrePasajero = input("Ingrese nombre pasajero: ")
-        rutPasajero = input("Ingrese rut pasajero (sin guiones ni puntos)): ")
-        telefonoPasajero = input("Ingrese telefono pasajero: ")
-        bancoPasajero = input("Ingrese banco pasajero: ")
-
-        # Crear una lista con los datos del nuevo pasajero
-        nuevoPasajero = [nombrePasajero, rutPasajero, telefonoPasajero, bancoPasajero]
-
-        # Asignar los datos del pasajero al asiento correspondiente 
-        asientos[nroAsiento - 1] = nuevoPasajero
+        comprar_pasajes()
 
     # Opción 3: Anular vuelo
     elif opcionMenu == 3:
         print("Anular vuelo")
+        anular_pasaje()
 
-        # Solicitar el número del asiento a anular
-        nroAsientoAAnular = int(input("Ingrese numero del asiento del pasaje a anular: "))
-
-        # Anular el asiento (vaciar la lista para indicar que está disponible)
-        asientos[nroAsientoAAnular - 1] = []
 
     # Opción 4: Modificar datos de pasajero
     elif opcionMenu == 4:
         print("Modificar datos de pasajero")
-
-        # Solicitar el número de asiento y el RUT del pasajero
-        nroAsiento = int(input("Ingrese numero asiento: "))
-        rutPasajero = input("Ingrese rut pasajero (sin guiones ni puntos)): ")
-
-        # Verificar que el RUT del pasajero coincida con el registrado en el asiento
-        if asientos[nroAsiento - 1][1] == rutPasajero:
-            print("RUT valido")
-
-            while True:
-                # Mostrar el menú de modificación de datos del pasajero
-                print("****Modificar datos pasajero****")
-                print("1. Modificar nombre pasajero")
-                print("2. Modificar telefono pasajero")
-                print("3. Salir")
-
-                # Obtener la opción del usuario para modificar datos
-                opcionMenuPasajero = int(input("Seleccione una opción: "))
-
-                # Modificar el nombre del pasajero
-                if opcionMenuPasajero == 1:
-                    nuevoNombrePasajero = input("Ingrese el nuevo nombre del pasajero: ")
-                    # Acceder a la lista del asiento y cambiar el nombre (índice 0 de la lista del asiento)
-                    asientos[nroAsiento - 1][0] = nuevoNombrePasajero
-
-                # Modificar el teléfono del pasajero
-                elif opcionMenuPasajero == 2:
-                    nuevoTelefonoPasajero = input("Ingrese el nuevo telefono del pasajero: ")
-                    # Acceder a la lista del asiento y cambiar el teléfono (índice 2 de la lista del asiento)
-                    asientos[nroAsiento - 1][2] = nuevoTelefonoPasajero
-
-                # Salir del menú de modificación de datos del pasajero
-                elif opcionMenuPasajero == 3:
-                    print("Saliendo...")
-                    break
-                else:
-                    # Opción no válida
-                    print("Seleccione una opcion valida.")
-        else:
-            print("Rut no encontrado.")
+        modificar_datos_pasajero()
 
     # Opción 5: Salir del programa
     elif opcionMenu == 5:
