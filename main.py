@@ -35,7 +35,7 @@ while True:
         verAsientos()
     elif opcionMenu == 2:
         print("Comprar asiento")
-        verAsientos()
+
 
     elif opcionMenu == 3:
         print("Anular vuelo")
