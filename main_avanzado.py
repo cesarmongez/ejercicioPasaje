@@ -1,4 +1,3 @@
-
 # Lista de asientos inicializada con 42 listas vacías, representando cada asiento.
 asientos = [
     [],
@@ -45,7 +44,6 @@ asientos = [
     [],
 ]
 
-
 precioAsientoNormal = 78900
 precioAsientoVIP = 240000
 totalPasaje = 0
@@ -61,8 +59,8 @@ def comprar_pasajes():
         print("Seleccionaste asiento normal.")
         totalPasaje = precioAsientoNormal
     elif nroAsiento > 30 and nroAsiento <=42:
-        print("Seleccionaste asiento normal.")
-        totalPasaje = precioAsientoNormal
+        print("Seleccionaste asiento vip")
+        totalPasaje = precioAsientoVIP
         
     nombrePasajero = input("Ingrese nombre pasajero: ")
     rutPasajero = input("Ingrese rut pasajero (sin guiones ni puntos)): ")
@@ -71,10 +69,10 @@ def comprar_pasajes():
 
     # Crear una lista con los datos del nuevo pasajero
     nuevoPasajero = [nombrePasajero, rutPasajero, telefonoPasajero, bancoPasajero]
+    #["Cesar", 2596179, 999999999, "bancoDuoc"]
 
     # Asignar los datos del pasajero al asiento correspondiente 
     asientos[nroAsiento - 1] = nuevoPasajero
-
     if bancoPasajero == "bancoDuoc":
         descuento = totalPasaje*0.15
     else:
