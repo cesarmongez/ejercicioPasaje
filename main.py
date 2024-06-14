@@ -3,7 +3,6 @@ from funciones import anular_pasaje,ver_asiento_disponible,comprar_pasajes,modif
 # Precios de los asientos
 precioAsientoNormal = 78900
 precioAsientoVIP = 240000
-totalPasaje = 0
 
 # Bucle infinito para mostrar el menú de opciones hasta que el usuario decida salir.
 while True:

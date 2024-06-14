@@ -19,14 +19,14 @@ def cargar_datos_pasajeros():
         with open('datos_vuelo.csv', 'r', newline='') as archivo:
             # Creamos un objeto lector de CSV
             lector = csv.reader(archivo)
+            
             # Inicializamos la lista 'asientos' para almacenar los datos leídos
             # Recorremos cada fila del archivo CSV, transformamos el rut y el telefono a entero, añadimos los datos a la lista datos_pasajero y esa lista la añadimos a la lista 'asientos'
             for fila in lector:
+                
                 if len(fila)< 4: #Si el largo de la fila es menor a 4 significa que esta vacia asi que simplemente agregamos una lista vacia a asientos.
                     asientos.append([])
                 else: #sino Convertimos los campos rut y teléfono a enteros si es posible
-
-                
                     nombre = fila[0]
                     rut = int(fila[1])  # Convertimos rut a entero
                     telefono = int(fila[2])  # Convertimos telefono a entero
@@ -43,8 +43,7 @@ def cargar_datos_pasajeros():
         asientos = []
         for i in range(42):
             asientos.append([])
-    except Exception as e:
-        print(e)
+
 
     # Retornamos la lista 'asientos' cargada o inicializada
     return asientos
